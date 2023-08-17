@@ -7,7 +7,7 @@ type NoteSearchArg = {
   setSearch: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export default function NoteSearch({ search, setSearch }: NoteSearchArg) {
+export default function NoteItemSearch({ search, setSearch }: NoteSearchArg) {
   return (
     <Row className="justify-content-start g-2 pt-3">
       <Col>

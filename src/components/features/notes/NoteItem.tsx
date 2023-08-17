@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Card } from "react-bootstrap";
-import { showFormattedDate } from "../utils/showFormattedDate";
-import NoteBadgeStatus from "./NoteBadgeStatus";
-import NoteButtonAction from "./NoteButtonAction";
+import { showFormattedDate } from "../../../utils/showFormattedDate";
+import NoteItemBadgeStatus from "./NoteItemBadgeStatus";
+import NoteItemButtonAction from "./NoteItemButtonAction";
 
 type Props = {
   title: string;
@@ -14,7 +14,7 @@ type Props = {
   onArchived: (id: string | number) => void;
 };
 
-const NoteListItem = ({
+const NoteItem = ({
   title,
   body,
   createdAt,
@@ -25,7 +25,7 @@ const NoteListItem = ({
 }: Props) => (
   <Col xxl={6} xl={6} lg={6} md={12}>
     <Card body data-bs-theme="dark" className="nl_card_item">
-      <NoteBadgeStatus archived={archived} />
+      <NoteItemBadgeStatus archived={archived} />
       <Card.Title className="text-start text-white mb-2 fs-5 fst-bolder">
         {title}
       </Card.Title>
@@ -36,7 +36,7 @@ const NoteListItem = ({
         {body.length > 150 ? `${body.slice(0, 150)}...` : body}
       </Card.Text>
 
-      <NoteButtonAction
+      <NoteItemButtonAction
         title={title}
         archived={archived}
         noteId={noteId}
@@ -47,4 +47,4 @@ const NoteListItem = ({
   </Col>
 );
 
-export default NoteListItem;
+export default NoteItem;

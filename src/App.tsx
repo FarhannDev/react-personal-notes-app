@@ -1,7 +1,6 @@
 import ThemeProvider from "react-bootstrap/ThemeProvider";
 import Layout from "./components/Layout";
-import SayHello from "./components/SayHello";
-import NoteApp from "./components/NoteApp";
+import NotesIndex from "./containers/notes/NoteIndex";
 
 export default function App() {
   return (
@@ -11,8 +10,8 @@ export default function App() {
       minBreakpoint="xxs"
     >
       <Layout>
-        <SayHello message="Halo, Selamat Datang Di Aplikasi Note List👋" />
-        <NoteApp />
+        {/* <SayHello message="Halo, Selamat Datang Di Aplikasi Note List👋" /> */}
+        <NotesIndex />
       </Layout>
     </ThemeProvider>
   );

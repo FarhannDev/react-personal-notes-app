@@ -3,7 +3,7 @@ import Stack from "react-bootstrap/Stack";
 
 type Props = { archived: boolean };
 
-export default function NoteBadgeStatus({ archived }: Props) {
+export default function NoteItemBadgeStatus({ archived }: Props) {
   return (
     <Stack
       direction="horizontal"

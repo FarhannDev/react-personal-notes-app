@@ -12,7 +12,7 @@ type Props = {
   onArchived: (id: string | number) => void;
 };
 
-export default function NoteButtonAction({
+export default function NoteItemButtonAction({
   title,
   archived,
   noteId,

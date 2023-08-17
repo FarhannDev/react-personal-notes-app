@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
-import AlertMessage from "./AlertMessage";
+import AlertMessage from "../../AlertMessage";
 
 type NoteInputArg = { title: string; body: string };
 type NoteInputProps = {
