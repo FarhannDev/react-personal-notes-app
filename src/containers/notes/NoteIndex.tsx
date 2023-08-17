@@ -5,6 +5,8 @@ import { getInitialData } from "../../utils/data/getInitialData";
 import NoteTabButton from "../../components/features/notes/NoteTabButton";
 import NoteFormInput from "../../components/features/notes/NoteFormInput";
 import NoteItemList from "../../components/features/notes/NoteItemList";
+import NoteItemSearch from "../../components/features/notes/NoteItemSearch";
+import NoteHeadingTitle from "../../components/features/notes/NoteHeadingTitle";
 
 type NoteInputArg = { title: string; body: string };
 
@@ -65,55 +67,69 @@ export default function NoteIndex() {
     setIsSuccess(true);
   };
 
+  const isNoteArchived: Notes[] = notes?.filter((note) => note.archived);
+  const isNoteUnArchived: Notes[] = notes?.filter((note) => !note.archived);
+
   const renderedContent: JSX.Element | null = isNotes ? (
-    <NoteItemList
-      notes={notes
-        .slice()
-        .filter(
-          (item) =>
-            item.title.toLowerCase().includes(search.toLowerCase()) ||
-            item.body.toLowerCase().includes(search.toLowerCase())
-        )
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))}
-      search={search}
-      setSearch={setSearch}
-      onDelete={onDeleteNotesHandler}
-      onArchived={onArchivedNotesHandler}
-    />
+    <>
+      <NoteHeadingTitle title="Semua Daftar Catatan" />
+      {notes.length ? (
+        <NoteItemSearch search={search} setSearch={setSearch} />
+      ) : null}
+      <NoteItemList
+        notes={notes
+          .slice()
+          .filter(
+            (item) =>
+              item.title.toLowerCase().includes(search.toLowerCase()) ||
+              item.body.toLowerCase().includes(search.toLowerCase())
+          )
+          .sort((a, b) => b.createdAt.localeCompare(a.createdAt))}
+        onDelete={onDeleteNotesHandler}
+        onArchived={onArchivedNotesHandler}
+      />
+    </>
   ) : isActiveNotes ? (
-    <NoteItemList
-      notes={notes
-        .slice()
-        .filter(
-          (item) =>
-            item.title.toLowerCase().includes(search.toLowerCase()) ||
-            item.body.toLowerCase().includes(search.toLowerCase())
-        )
-        .filter((note) => !note.archived)
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))}
-      search={search}
-      setSearch={setSearch}
-      onDelete={onDeleteNotesHandler}
-      onArchived={onArchivedNotesHandler}
-      initialTitle="Catatan Aktif"
-    />
+    <>
+      <NoteHeadingTitle title={`${isNoteUnArchived.length} Catatan Aktif`} />
+      {isNoteUnArchived.length ? (
+        <NoteItemSearch search={search} setSearch={setSearch} />
+      ) : null}
+      <NoteItemList
+        notes={notes
+          .slice()
+          .filter(
+            (item) =>
+              item.title.toLowerCase().includes(search.toLowerCase()) ||
+              item.body.toLowerCase().includes(search.toLowerCase())
+          )
+          .filter((note) => !note.archived)
+          .sort((a, b) => b.createdAt.localeCompare(a.createdAt))}
+        onDelete={onDeleteNotesHandler}
+        onArchived={onArchivedNotesHandler}
+      />
+    </>
   ) : isArchiveNotes ? (
-    <NoteItemList
-      notes={notes
-        .slice()
-        .filter(
-          (item) =>
-            item.title.toLowerCase().includes(search.toLowerCase()) ||
-            item.body.toLowerCase().includes(search.toLowerCase())
-        )
-        .filter((note) => note.archived)
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt))}
-      search={search}
-      setSearch={setSearch}
-      onDelete={onDeleteNotesHandler}
-      onArchived={onArchivedNotesHandler}
-      initialTitle="Catatan Diarsipkan"
-    />
+    <>
+      <NoteHeadingTitle title={`${isNoteArchived.length} Catatan Diarsipkan`} />
+      {isNoteArchived.length ? (
+        <NoteItemSearch search={search} setSearch={setSearch} />
+      ) : null}
+
+      <NoteItemList
+        notes={notes
+          .slice()
+          .filter(
+            (item) =>
+              item.title.toLowerCase().includes(search.toLowerCase()) ||
+              item.body.toLowerCase().includes(search.toLowerCase())
+          )
+          .filter((note) => note.archived)
+          .sort((a, b) => b.createdAt.localeCompare(a.createdAt))}
+        onDelete={onDeleteNotesHandler}
+        onArchived={onArchivedNotesHandler}
+      />
+    </>
   ) : null;
 
   return (
@@ -129,6 +145,7 @@ export default function NoteIndex() {
             setIsActiveNotes={setIsActiveNotes}
             setIsArchiveNotes={setIsArchiveNotes}
           />
+
           {renderedContent}
         </Col>
       </Row>
