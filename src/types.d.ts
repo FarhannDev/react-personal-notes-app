@@ -4,4 +4,5 @@ type Notes = {
   body: string,
   archived: boolean, 
   createdAt: string,
+  updatedAt: string | null,
 }

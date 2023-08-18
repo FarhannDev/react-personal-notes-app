@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { nanoid } from "nanoid";
 import { Row, Col } from "react-bootstrap";
-import { getInitialData } from "../../utils/data/getInitialData";
 import NoteTabButton from "../../components/features/notes/NoteTabButton";
-import NoteFormInput from "../../components/features/notes/NoteFormInput";
 import NoteItemList from "../../components/features/notes/NoteItemList";
 import NoteItemSearch from "../../components/features/notes/NoteItemSearch";
 import NoteHeadingTitle from "../../components/features/notes/NoteHeadingTitle";
+import NoteFormInput from "../../components/features/notes/NoteFormInput";
 
+type Props = {
+  notes: Notes[];
+  setNotes: React.Dispatch<React.SetStateAction<Notes[]>>;
+};
 type NoteInputArg = { title: string; body: string };
 
-export default function NoteIndex() {
-  const [notes, setNotes] = useState<Notes[]>(getInitialData);
+export default function NoteIndex({ notes, setNotes }: Props) {
+  // const [notes, setNotes] = useState<Notes[]>(getInitialData);
   const [isArchiveNotes, setIsArchiveNotes] = useState<boolean>(false);
   const [isActiveNotes, setIsActiveNotes] = useState<boolean>(false);
   const [isNotes, setIsNotes] = useState<boolean>(true);
@@ -29,8 +32,14 @@ export default function NoteIndex() {
   const onArchivedNotesHandler: (id: string | number) => void = (
     id: string | number
   ): void => {
-    const updatedArchived: Partial<Notes> = { archived: true };
-    const updatedUnArchived: Partial<Notes> = { archived: false };
+    const updatedArchived: Partial<Notes> = {
+      archived: true,
+      updatedAt: new Date().toISOString(),
+    };
+    const updatedUnArchived: Partial<Notes> = {
+      archived: false,
+      updatedAt: new Date().toISOString(),
+    };
     const items: Notes[] = notes.map((item) => {
       if (item.id === id) {
         if (!item.archived) {
@@ -61,6 +70,7 @@ export default function NoteIndex() {
       body,
       archived: false,
       createdAt: new Date().toISOString(),
+      updatedAt: null,
     };
 
     setNotes([...notes, newNotes]);
@@ -69,7 +79,6 @@ export default function NoteIndex() {
 
   const isNoteArchived: Notes[] = notes?.filter((note) => note.archived);
   const isNoteUnArchived: Notes[] = notes?.filter((note) => !note.archived);
-
   const renderedContent: JSX.Element | null = isNotes ? (
     <>
       <NoteHeadingTitle title="Semua Daftar Catatan" />
@@ -133,22 +142,20 @@ export default function NoteIndex() {
   ) : null;
 
   return (
-    <>
-      <Row className="justify-content-center g-2 py-3">
-        <Col lg={8} md={10} sm={12}>
-          <NoteFormInput addNotes={onAddNotesHandler} isSuccess={isSuccess} />
-          <NoteTabButton
-            isNotes={isNotes}
-            isArchiveNotes={isArchiveNotes}
-            isActiveNotes={isActiveNotes}
-            setIsNotes={setIsNotes}
-            setIsActiveNotes={setIsActiveNotes}
-            setIsArchiveNotes={setIsArchiveNotes}
-          />
+    <Row className="justify-content-center g-2 py-5">
+      <Col lg={8} md={10} sm={12}>
+        <NoteFormInput addNotes={onAddNotesHandler} isSuccess={isSuccess} />
+        <NoteTabButton
+          isNotes={isNotes}
+          isArchiveNotes={isArchiveNotes}
+          isActiveNotes={isActiveNotes}
+          setIsNotes={setIsNotes}
+          setIsActiveNotes={setIsActiveNotes}
+          setIsArchiveNotes={setIsArchiveNotes}
+        />
 
-          {renderedContent}
-        </Col>
-      </Row>
-    </>
+        {renderedContent}
+      </Col>
+    </Row>
   );
 }

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Col, Row, Form } from "react-bootstrap";
 import React from "react";
 

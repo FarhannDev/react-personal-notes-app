@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Stack, Button } from "react-bootstrap";
 
 type Props = {
@@ -18,7 +17,7 @@ const NoteTabButton = ({
   setIsArchiveNotes,
   setIsActiveNotes,
 }: Props) => (
-  <Stack direction="horizontal" gap={2} className="mb-3 pt-5">
+  <Stack direction="horizontal" gap={2} className="py-3">
     <Button
       onClick={() => {
         setIsNotes(true);

@@ -1,16 +1,16 @@
-import * as React from "react";
 import HeaderNav from "./HeaderNav";
 import { Container } from "react-bootstrap";
+import { Outlet } from "react-router-dom";
 
-type LayoutTypeProps = { children: React.ReactNode };
-
-export default function Layout({ children }: LayoutTypeProps) {
+export default function Layout() {
   return (
     <>
       <HeaderNav />
       <main className="position-relative px-0 mx-0">
         {/* Rendered Component */}
-        <Container>{children}</Container>
+        <Container>
+          <Outlet />
+        </Container>
       </main>
     </>
   );

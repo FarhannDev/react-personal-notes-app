@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import React from "react";
 import { Row } from "react-bootstrap";
+import React from "react";
 import NoteItem from "./NoteItem";
 import Message from "../../shared/Message";
 

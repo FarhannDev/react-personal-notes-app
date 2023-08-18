@@ -3,7 +3,7 @@ import Form from "react-bootstrap/Form";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import React, { useState } from "react";
-import AlertMessage from "../../AlertMessage";
+import AlertMessage from "../../shared/AlertMessage";
 
 type NoteInputArg = { title: string; body: string };
 type NoteInputProps = {
@@ -41,6 +41,8 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
     setTitle("");
     setBody("");
   };
+
+  const disabledButton = Boolean(title.length) && Boolean(body.length);
 
   return (
     <div className="position-relative px-0 mx-0 py-3">
@@ -91,9 +93,10 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
           <div className="">
             <Stack direction="vertical" gap={2} className="mb-3">
               <Button
+                disabled={!disabledButton}
                 type="submit"
-                variant="outline-primary"
                 className="rounded d-block w-100 text-center text-white text-capitalize fst-normal fs-6"
+                style={{ backgroundColor: "#4c0bce" }}
               >
                 Buat Catatan Baru
               </Button>{" "}
