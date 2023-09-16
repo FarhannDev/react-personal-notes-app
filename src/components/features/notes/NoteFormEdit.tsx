@@ -1,6 +1,6 @@
-import { Stack } from "react-bootstrap";
-import { useState } from "react";
-import { showFormattedDate } from "../../../utils/showFormattedDate";
+import { Stack } from 'react-bootstrap';
+import { useState } from 'react';
+import { showFormattedDate } from '../../../utils/showFormattedDate';
 
 type NoteFormEditProps = {
   notes: Notes[];
@@ -20,7 +20,11 @@ export default function NoteFormEdit({
   const onTitleChangeHandler: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.target.value);
+    const value = e.target.value;
+
+    if (value.length <= 50) {
+      setTitle(value);
+    }
   };
 
   const onBodyChangeEventHandler: (
@@ -34,6 +38,8 @@ export default function NoteFormEdit({
 
     onUpdate(title, body);
   };
+
+  const disabledButton = Boolean(title) && Boolean(body);
 
   return (
     <div className="position-relative px-0 mx-0">
@@ -72,7 +78,12 @@ export default function NoteFormEdit({
             ></textarea>
           </div>
 
-          <button type="submit" className="btn btn-danger btn-md rounded">
+          <button
+            disabled={!disabledButton}
+            type="submit"
+            className="btn btn-md rounded-pill border-0"
+            style={{ backgroundColor: '#4c0bce' }}
+          >
             Perbarui Catatan
           </button>
         </Stack>

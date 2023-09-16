@@ -1,20 +1,18 @@
-import { useState } from "react";
-import { getInitialData } from "./utils/data/getInitialData";
-import { Routes, Route, Navigate } from "react-router-dom";
-import ThemeProvider from "react-bootstrap/ThemeProvider";
-import Layout from "./components/shared/Layout";
-import NotesIndex from "./containers/notes/NoteIndex";
-import NoteEdit from "./containers/notes/NoteEdit";
+import { useState } from 'react';
+import { getInitialData } from './utils/data/getInitialData';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import ThemeProvider from 'react-bootstrap/ThemeProvider';
+import Layout from './components/shared/Layout';
+import NotesIndex from './containers/notes/NoteIndex';
+import NoteEdit from './containers/notes/NoteEdit';
 
 export default function App() {
   // Set Parent Initial Data
   const [notes, setNotes] = useState<Notes[]>(getInitialData);
-
-  console.log({ notes });
   return (
     <ThemeProvider
       data-bs-theme="dark"
-      breakpoints={["xxxl", "xxl", "xl", "lg", "md", "sm", "xs", "xxs"]}
+      breakpoints={['xxxl', 'xxl', 'xl', 'lg', 'md', 'sm', 'xs', 'xxs']}
       minBreakpoint="xxs"
     >
       <Routes>

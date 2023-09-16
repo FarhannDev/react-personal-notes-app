@@ -1,8 +1,8 @@
-import { useParams } from "react-router-dom";
-import { Row, Col } from "react-bootstrap";
-import ButtonBack from "../../components/shared/ButtonBack";
-import HeadingTitle from "../../components/shared/HeadingTitle";
-import NoteFormEdit from "../../components/features/notes/NoteFormEdit";
+import { useParams } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
+import ButtonBack from '../../components/shared/ButtonBack';
+import HeadingTitle from '../../components/shared/HeadingTitle';
+import NoteFormEdit from '../../components/features/notes/NoteFormEdit';
 
 type Props = {
   notes: Notes[];
@@ -40,8 +40,8 @@ export default function NoteEdit({ notes, setNotes }: Props) {
     <Row className="justify-content-center g-2 py-5">
       <Col lg={8} md={10} sm={12}>
         <ButtonBack title="Kembali" link="/note" />
-        <div className="pt-2">
-          <HeadingTitle title="Perbarui Daftar Catatan" />
+        <div className="pt-3">
+          <HeadingTitle title="Form Edit Catatan" />
         </div>
         <hr className="text-secondary" />
 

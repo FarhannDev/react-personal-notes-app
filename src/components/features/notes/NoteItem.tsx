@@ -1,8 +1,8 @@
-import { Col, Card } from "react-bootstrap";
-import { showFormattedDate } from "../../../utils/showFormattedDate";
-import NoteItemBadgeStatus from "./NoteItemBadgeStatus";
-import NoteItemButtonAction from "./NoteItemButtonAction";
-import { Link } from "react-router-dom";
+import { Col, Card } from 'react-bootstrap';
+import { showFormattedDate } from '../../../utils/showFormattedDate';
+import NoteItemBadgeStatus from './NoteItemBadgeStatus';
+import NoteItemButtonAction from './NoteItemButtonAction';
+import { Link } from 'react-router-dom';
 
 type Props = {
   title: string;
@@ -32,7 +32,7 @@ const NoteItem = ({
       </Card.Title> */}
       <Link
         to={`${noteId}/edit`}
-        className="text-start text-white mb-3 fs-4 fst-bolder link-offset-2 link-underline link-underline-opacity-0"
+        className="text-start text-white mb-3 fs-4 fst-bolder link-offset-2 link-underline link-underline-opacity-0 "
       >
         {title.length > 50 ? `${title.substring(0, 50)}...` : title}
       </Link>
