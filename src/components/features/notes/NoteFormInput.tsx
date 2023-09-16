@@ -106,7 +106,7 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
               </Button>{' '}
               <Button
                 type="reset"
-                variant="danger"
+                variant="dark"
                 className="rounded-pill d-block w-100 text-center text-capitalize fst-normal fs-6"
               >
                 Batalkan
