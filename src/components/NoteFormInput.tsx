@@ -1,9 +1,9 @@
-import Stack from "react-bootstrap/Stack";
-import Form from "react-bootstrap/Form";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
-import React, { useState } from "react";
-import AlertMessage from "./AlertMessage";
+import Stack from 'react-bootstrap/Stack';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import React, { useState } from 'react';
+import AlertMessage from './AlertMessage';
 
 type NoteInputArg = { title: string; body: string };
 type NoteInputProps = {
@@ -12,14 +12,20 @@ type NoteInputProps = {
 };
 
 export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
-  const [title, setTitle] = useState<string>("");
-  const [body, setBody] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
+  const [body, setBody] = useState<string>('');
   const limit: number = 50;
 
   const onTitleChangeHandler: (
     e: React.ChangeEvent<HTMLInputElement>
   ) => void = (e: React.ChangeEvent<HTMLInputElement>) => {
-    title.length < limit ? setTitle(e.target.value) : 0;
+    const value = e.target.value;
+
+    if (value.length <= limit) {
+      setTitle(value);
+    }
+
+    // title.length < limit ? setTitle(e.target.value) : 0;
   };
 
   const onBodyChangeEventHandler: (
@@ -29,8 +35,8 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
   };
 
   const onResetValueHandler = () => {
-    setTitle("");
-    setBody("");
+    setTitle('');
+    setBody('');
   };
 
   const onAddNotesHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,14 +44,16 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
 
     title.length <= limit && body.length ? addNotes({ title, body }) : null;
 
-    setTitle("");
-    setBody("");
+    setTitle('');
+    setBody('');
   };
+
+  const disabledButton = Boolean(title) && Boolean(body);
 
   return (
     <div className="position-relative px-0 mx-0 py-3">
       <Card body data-bs-theme="dark">
-        <Card.Title>Tambah Catatan Baru</Card.Title>
+        <Card.Title>Form Tambah Catatan Baru</Card.Title>
         <hr className="text-secondary" />
 
         {isSuccess && (
@@ -62,7 +70,7 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
         >
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label className="text-start text-white fst-normal">
-              Judul Catatan:{" "}
+              Judul Catatan:{' '}
               <span className="text-danger">
                 * Sisa Karakter: {title.length ? limit - title.length : limit}
               </span>
@@ -72,7 +80,7 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
               placeholder="Judul Catatan"
               value={title}
               onChange={onTitleChangeHandler}
-              autoComplete={"title"}
+              autoComplete={'title'}
             />
           </Form.Group>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -91,19 +99,20 @@ export default function NoteFormInput({ addNotes, isSuccess }: NoteInputProps) {
           <div className="">
             <Stack direction="vertical" gap={2} className="mb-3">
               <Button
+                style={{ backgroundColor: '#4c0bce' }}
+                disabled={!disabledButton}
                 type="submit"
-                variant="outline-primary"
-                className="rounded d-block w-100 text-center text-white text-capitalize fst-normal fs-6"
+                className="rounded-pill d-block w-100 text-center text-white text-capitalize fst-normal fs-6"
               >
                 Buat Catatan Baru
-              </Button>{" "}
+              </Button>{' '}
               <Button
                 type="reset"
-                variant="danger"
-                className="rounded d-block w-100 text-center text-capitalize fst-normal fs-6"
+                variant="dark"
+                className="rounded-pill d-block w-100 text-center text-capitalize fst-normal fs-6"
               >
                 Batalkan
-              </Button>{" "}
+              </Button>{' '}
             </Stack>
           </div>
         </Form>

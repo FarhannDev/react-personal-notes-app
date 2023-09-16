@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useState } from "react";
-import { nanoid } from "nanoid";
-import { Row, Col } from "react-bootstrap";
-import { getInitialData } from "../utils/getInitialData";
-import NoteTabButton from "./NoteTabButton";
-import NoteList from "./NoteList";
-import NoteFormInput from "./NoteFormInput";
-import NoteArchived from "./NoteArchive";
-import NoteActive from "./NoteActive";
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
+import { Row, Col } from 'react-bootstrap';
+import { getInitialData } from '../utils/getInitialData';
+import NoteTabButton from './NoteTabButton';
+import NoteList from './NoteList';
+import NoteFormInput from './NoteFormInput';
+import NoteArchived from './NoteArchive';
+import NoteActive from './NoteActive';
 
 type NoteInputArg = { title: string; body: string };
 
